@@ -25,6 +25,6 @@
             if(!$success) {
                 throw new Exception("Erro: " . $statement->errorInfo()[2]);
             }
-            return $statement->fetchall();
+            return $statement->fetchAll();
         }
     }

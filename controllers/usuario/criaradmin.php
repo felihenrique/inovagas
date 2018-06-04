@@ -1,7 +1,7 @@
 <?php
 
 if(is_post()) {
-    require_once("repositories/AdminRepository.php");
+    require_once("AdminRepository.php");
     $adminRepo = new AdminRepository();
     if($adminRepo->criar($_POST)) {
         header('Location:/index.php');

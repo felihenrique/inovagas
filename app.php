@@ -8,7 +8,7 @@ if(!file_exists('controllers/' . $arquivo_req)) {
     echo "Not found";
     die();
 }
-
+session_start();
 $conf = parse_ini_file('CONFIGURACOES.ini');
 
 $views = PATH_SEPARATOR . './views';
