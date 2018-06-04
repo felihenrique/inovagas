@@ -7,10 +7,13 @@ class UsuarioRepository {
     }
 
     public function logarUsuario($login, $senha) {
-        $query = "SELECT * FROM usuario WHERE login = ':login' AND password = ':senha'";
-        $this->connection->execute($query, [
-            'login' => $login,
-            'senha' => $senha
+        $query = "SELECT * FROM usuario WHERE login = :login";
+        $result = $this->connection->execute($query, [
+            ':login' => $login
         ]);
+        if(!$result) {
+            return false;
+        }
+        return password_verify ( $senha , $result[0]['senha'] );
     }
 }
