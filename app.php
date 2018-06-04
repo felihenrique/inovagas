@@ -9,6 +9,8 @@ if(!file_exists('controllers/' . $arquivo_req)) {
     die();
 }
 
+$conf = parse_ini_file('CONFIGURACOES.ini');
+
 $views = PATH_SEPARATOR . './views';
 $controllers = PATH_SEPARATOR . './controllers';
 $repositories = PATH_SEPARATOR . './repositories';

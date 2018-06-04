@@ -4,7 +4,12 @@
 
         function __construct() {
             try {
-                $this->pdo = new PDO("mysql:host=127.0.0.1;dbname=inovagas", "root", "root");
+                $conf = $GLOBALS['conf'];
+                $dbname = $conf['DB_NAME'];
+                $dbuser = $conf['DB_USER'];
+                $dbpass = $conf['DB_PASSWORD'];
+                $dbhost = $conf['DB_HOST'];
+                $this->pdo = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
             } catch(PDOException $e) {
                 echo $e->getMessage();
             }
