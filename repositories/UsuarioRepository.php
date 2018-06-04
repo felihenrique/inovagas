@@ -10,7 +10,7 @@ class UsuarioRepository extends Repository {
             return false;
         }
         $passValido = password_verify ( $senha , $result[0]['senha'] );
-        return $passValido ? false : $result;
+        return $passValido ? $result : false;
     }
 
     public function buscarPorId($idusuario) {
