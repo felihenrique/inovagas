@@ -1,7 +1,7 @@
 <?php
-    require_once('../header.php');
+    require_once(__DIR__ . '/../../header.php');
 ?>
-<form action="criarusuario.php" method="post">
+<form action="criaradmin.php" method="post">
     <div>
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome">
@@ -47,9 +47,14 @@
         <input type="text" name="data_nascimento" id="data_nascimento">
     </div>
 
+    <div>
+        <label for="cpf">CPF</label>
+        <input type="text" name="cpf" id="cpf">
+    </div>
+
     <input type="submit" value="Submeter">
 </form>
 
 <?php
-    require_once('../footer.php');
+    require_once(__DIR__ . '/../../footer.php');
 ?>

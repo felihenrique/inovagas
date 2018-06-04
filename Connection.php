@@ -10,17 +10,16 @@
             }
         }
 
+        public function getPDO() {
+            return $this->pdo;
+        }
+
         public function execute($sql, $params=[]) {
-            try {
-                $statement = $this->pdo->prepare($sql);
-                $success = $statement->execute($params);
-                if(!$success) {
-                    echo "Erro: " . $statement->errorInfo()[2];
-                    die();
-                }
-                return $statement->fetchall();
-            } catch(PDOException $e) {
-                echo $e->getMessage();
+            $statement = $this->pdo->prepare($sql);
+            $success = $statement->execute($params);
+            if(!$success) {
+                throw new Exception("Erro: " . $statement->errorInfo()[2]);
             }
+            return $statement->fetchall();
         }
     }

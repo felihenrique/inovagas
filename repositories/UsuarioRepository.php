@@ -1,11 +1,6 @@
 <?php
-require_once('../Connection.php');
-class UsuarioRepository {
-    protected $connection;
-    function __construct() {
-        $this->connection = new Connection();
-    }
-
+require_once(__DIR__ . '/Repository.php');
+class UsuarioRepository extends Repository {
     public function logarUsuario($login, $senha) {
         $query = "SELECT * FROM usuario WHERE login = :login";
         $result = $this->connection->execute($query, [
