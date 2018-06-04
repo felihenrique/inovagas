@@ -21,8 +21,13 @@ class UsuarioRepository extends Repository {
             ]);
         }
         catch(Exception $e) {
-            return false;
+            throw new Exception("Erro: " . $e->getMessage());
         }
-        return $result;
+        if(count($result) > 0) {
+            return $result[0];
+        }
+        else {
+            return null;
+        }
     }
 }

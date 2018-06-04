@@ -4,7 +4,7 @@
     $userRepo = new UsuarioRepository();
     $usuario = $userRepo->buscarPorId($_SESSION['idusuario']);
     render_view("inicio.php", [
-        'usuario' => $usuario[0]
+        'usuario' => $usuario
     ]);
 ?>
 
