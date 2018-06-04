@@ -1,1 +1,1 @@
-php -c php.ini -S localhost:8080 -t public
+php -c php.ini -S localhost:8080 -t controllers app.php

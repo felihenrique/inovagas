@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/Repository.php');
+require_once("repositories/Repository.php");
 class UsuarioRepository extends Repository {
     public function logarUsuario($login, $senha) {
         $query = "SELECT * FROM usuario WHERE login = :login";

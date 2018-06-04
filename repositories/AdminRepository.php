@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/Repository.php");
+require_once("repositories/Repository.php");
 class AdminRepository extends Repository {
     public function criar($dados) {
         $dados['senha'] = password_hash($_POST['senha'], PASSWORD_BCRYPT);
