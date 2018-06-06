@@ -6,7 +6,14 @@ $empresas = [
 ];
 ?>
 <table>
+<tr>
+	<th>Nome</th>
+	<th>Email</th>
+</tr>
 <?php foreach ($empresas as $empresa) { ?>
-	Nome empresa: <?php echo $empresa['nome'] ?> , Email empresa: <?php echo $empresa['email'] ?><br>
+	<tr>
+		<td><?php echo $empresa['nome'] ?></td>
+		<td><?php echo $empresa['email'] ?></td>
+	</tr>
 <?php } ?>
 </table>
