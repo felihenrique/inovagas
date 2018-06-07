@@ -9,9 +9,11 @@
                 $dbuser = $conf['DB_USER'];
                 $dbpass = $conf['DB_PASSWORD'];
                 $dbhost = $conf['DB_HOST'];
-                $this->pdo = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+                $dns = "mysql:host=$dbhost;dbname=$dbname";
+                $this->pdo = new PDO($dns, $dbuser, $dbpass);
             } catch(PDOException $e) {
                 echo $e->getMessage();
+                die();
             }
         }
 
