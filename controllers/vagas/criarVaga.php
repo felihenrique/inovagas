@@ -4,9 +4,9 @@ if(is_post()) {
     require_once("VagaRepository.php");
     $vagaRepo = new VagaRepository();
     if($vagaRepo->criar($_POST)) {
-        header('Location:/criarVaga.php');
+        header('Location:/vagas/criarVaga.php');
     }
 }
 else {
-    render_view("vagas/criarVaga.php");
+    render_view("/vagas/criarVaga.php");
 }
