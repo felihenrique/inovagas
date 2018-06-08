@@ -1,4 +1,4 @@
-<form action="criarVaga.php" method="post">
+<form action="vagas/criarVaga.php" method="post">
     <div>
         <label for="titulo">Título</label>
         <input type="text" name="titulo" id="titulo">
