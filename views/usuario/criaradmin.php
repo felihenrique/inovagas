@@ -1,43 +1,5 @@
 <form action="criaradmin.php" method="post">
-    <div>
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome">
-    </div>
-
-    <div>
-        <label for="login">Login</label>
-        <input type="text" name="login" id="login">
-    </div>
-    
-    <div>
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha">
-    </div>
-
-    <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email">
-    </div>
-
-    <div>
-        <label for="rua">Rua</label>
-        <input type="text" name="rua" id="rua">
-    </div>
-
-    <div>
-        <label for="bairro">Bairro</label>
-        <input type="text" name="bairro" id="bairro">
-    </div>
-
-    <div>
-        <label for="rua">Cidade</label>
-        <input type="text" name="cidade" id="cidade">
-    </div>
-
-    <div>
-        <label for="rua">Estado</label>
-        <input type="text" name="estado" id="estado">
-    </div>
+    <? include('usuario/criarusuario.php'); ?>
 
     <div>
         <label for="rua">Data nascimento</label>
