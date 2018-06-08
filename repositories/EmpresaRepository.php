@@ -35,4 +35,12 @@ class EmpresaRepository extends Repository {
             return false;
         }
     }
+
+    public function listarPreCadastradas() {
+        $query = "SELECT * FROM empresa WHERE aprovado = :aprovado";
+        $result = $this->connection->execute($query, [
+            ':aprovado' => '0'
+        ]); 
+        return $result;
+    }
 }
