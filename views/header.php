@@ -41,7 +41,7 @@
         </div>
       </li>
     </ul>
-    <?php if($_SESSION['logged']) { ?> 
+    <?php if(isset($_SESSION['logged']) && $_SESSION['logged']) { ?> 
     <a class="nav-item" href="usuario/logout.php">
     <i class="fas fa-sign-out-alt"></i>
       Logout
