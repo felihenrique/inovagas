@@ -1,4 +1,9 @@
 <div class="container">
+<?php if($login_failed) { ?>
+    <div class="alert alert-danger">
+    <strong>Erro!</strong> Usuário ou senha incorretos.
+    </div>
+<?php } ?>
 <form action="login.php" method="post">
     <div class="form-group">
         <label for="login">Login: </label>

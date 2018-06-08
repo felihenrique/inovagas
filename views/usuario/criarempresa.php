@@ -10,12 +10,18 @@
 
     <div class="form-group">
         <label for="cnpj">CNPJ</label>
-        <input class="form-control" type="text" name="cnpj" id="cnpj" placeholder="Digite o CNPJ da empresa">
+        <input required class="form-control" type="text" name="cnpj" id="cnpj" placeholder="Digite o CNPJ da empresa">
     </div>
 
     <div class="form-group">
         <label for="area">Área</label>
         <input class="form-control" type="text" name="area" id="area" placeholder="Digite a área em que a empresa atua">
+    </div>
+
+    <div class="form-group">
+        <label for="nome_fantasia">Nome fantasia</label>
+        <input required class="form-control" type="text" name="nome_fantasia" id="nome_fantasia" 
+        placeholder="Digite o nome fantasia da empresa">
     </div>
 
     <input class="btn btn-primary" type="submit" value="Submeter">

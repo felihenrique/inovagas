@@ -10,9 +10,11 @@ if(is_post()) {
         header('Location:/index.php');
     }
     else {
-        echo "USUARIO OU SENHA INCORRETOS";
+        header('Location:login.php?loginfailed=1');
     }
 }
 else {
-    render_view("usuario/loginform.php");
+    render_view("usuario/loginform.php", [
+        'login_failed' => isset($_GET['loginfailed'])
+    ]);
 }

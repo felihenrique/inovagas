@@ -1,6 +1,6 @@
 <?php
 require_once("Repository.php");
-class AlunoRepository extends Repository {
+class EmpresaRepository extends Repository {
     public function criar($dados) {
         $dados['senha'] = password_hash($_POST['senha'], PASSWORD_BCRYPT);
         $dados['data_nascimento'] = converter_data($_POST['data_nascimento']);
