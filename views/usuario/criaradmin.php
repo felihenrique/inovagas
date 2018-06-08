@@ -1,15 +1,21 @@
 <form action="criaradmin.php" method="post">
-    <? include('usuario/criarusuario.php'); ?>
+    <?php require_once('views/usuario/criarusuario.php'); ?>
 
-    <div>
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input required class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome completo">
+    </div>
+
+    <div class="form-group">
         <label for="rua">Data nascimento</label>
-        <input type="text" name="data_nascimento" id="data_nascimento">
+        <input class="form-control" type="text" name="data_nascimento" id="data_nascimento"
+        placeholder="Digite sua data de nascimento no formato DD/MM/YYYY">
     </div>
 
-    <div>
+    <div class="form-group">
         <label for="cpf">CPF</label>
-        <input type="text" name="cpf" id="cpf">
+        <input class="form-control" type="text" name="cpf" id="cpf" placeholder="Digite seu CPF">
     </div>
 
-    <input type="submit" value="Submeter">
+    <input class="btn btn-primary" type="submit" value="Submeter">
 </form>
