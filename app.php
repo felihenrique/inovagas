@@ -1,5 +1,6 @@
 <?php
 $arquivo_req = $_SERVER['REQUEST_URI'];
+$arquivo_req = explode('?', $arquivo_req)[0];
 if($arquivo_req[strlen($arquivo_req) - 1] == '/') {
     $arquivo_req .= 'index.php';
 }

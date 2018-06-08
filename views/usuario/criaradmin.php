@@ -1,53 +1,22 @@
+<h5 class="card-title">Cadastro de administradores</h5>
 <form action="criaradmin.php" method="post">
-    <div>
+    <?php require_once('views/usuario/criarusuario.php'); ?>
+
+    <div class="form-group">
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome">
+        <input required class="form-control" type="text" name="nome" id="nome" placeholder="Digite o nome completo">
     </div>
 
-    <div>
-        <label for="login">Login</label>
-        <input type="text" name="login" id="login">
-    </div>
-    
-    <div>
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha">
-    </div>
-
-    <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email">
-    </div>
-
-    <div>
-        <label for="rua">Rua</label>
-        <input type="text" name="rua" id="rua">
-    </div>
-
-    <div>
-        <label for="bairro">Bairro</label>
-        <input type="text" name="bairro" id="bairro">
-    </div>
-
-    <div>
-        <label for="rua">Cidade</label>
-        <input type="text" name="cidade" id="cidade">
-    </div>
-
-    <div>
-        <label for="rua">Estado</label>
-        <input type="text" name="estado" id="estado">
-    </div>
-
-    <div>
+    <div class="form-group">
         <label for="rua">Data nascimento</label>
-        <input type="text" name="data_nascimento" id="data_nascimento">
+        <input class="form-control" type="text" name="data_nascimento" id="data_nascimento"
+        placeholder="Digite sua data de nascimento no formato DD/MM/YYYY">
     </div>
 
-    <div>
+    <div class="form-group">
         <label for="cpf">CPF</label>
-        <input type="text" name="cpf" id="cpf">
+        <input class="form-control" type="text" name="cpf" id="cpf" placeholder="Digite seu CPF">
     </div>
 
-    <input type="submit" value="Submeter">
+    <input class="btn btn-primary" type="submit" value="Submeter">
 </form>
