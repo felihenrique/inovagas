@@ -1,3 +1,4 @@
+<h5 class="card-title">Cadastro de alunos</h5>
 <form action="criaraluno.php" method="post">
     <?php require_once('views/usuario/criarusuario.php'); ?>
     <div class="form-group">

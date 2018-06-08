@@ -1,3 +1,4 @@
+<h5 class="card-title">Cadastro de empresas</h5>
 <form action="criarempresa.php" method="post">
     <?php require_once('views/usuario/criarusuario.php'); ?>
 
