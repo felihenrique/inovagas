@@ -1,8 +1,10 @@
 <?php 
 	require_once("EmpresaRepository.php");
 	$empresaRepo = new EmpresaRepository();
-	$empresaRepo->listarPreCadastradas();
+	$empresas = $empresaRepo->listarPreCadastradas();
 
-	render_view("usuario/aprovacaoempresa.php");
+	render_view("usuario/aprovacaoempresa.php", [
+			'empresas' => $empresas
+		]);
 
 ?>

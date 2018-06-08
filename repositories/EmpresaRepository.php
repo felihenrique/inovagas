@@ -37,7 +37,7 @@ class EmpresaRepository extends Repository {
     }
 
     public function listarPreCadastradas() {
-        $query = "SELECT * FROM empresa WHERE aprovado = :aprovado";
+        $query = "SELECT * FROM empresa INNER JOIN usuario WHERE aprovado = :aprovado";
         $result = $this->connection->execute($query, [
             ':aprovado' => '0'
         ]); 
