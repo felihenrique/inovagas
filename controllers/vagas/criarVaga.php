@@ -8,5 +8,5 @@ if(is_post()) {
     }
 }
 else {
-    render_view("usuario/criarVaga.php");
+    render_view("vagas/criarVaga.php");
 }

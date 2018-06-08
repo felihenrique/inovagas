@@ -1,11 +1,3 @@
-<?php
-
-    require_once("VagaRepository.php");
-    $vagaRepo = new VagaRepository();
-    $vagas = $vagaRepo->listar()
-        
-
-?>
 <table>
 <tr>
 	<th>Titulo</th>
