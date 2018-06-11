@@ -1,6 +1,7 @@
 <?php
 require_once("Repository.php");
 class VagaRepository extends Repository {
+
     public function criar($dados) {
      $dados['prazo_inscricoes'] = converter_data($_POST['prazo_inscricoes']);
         try {
@@ -52,5 +53,28 @@ class VagaRepository extends Repository {
         else {
             return null;
         }
+    }
+
+     public function alterar($dados,$idvaga) {
+        $query = "UPDATE vaga SET titulo=:titulo, descricao=:descricao, prazo_inscricoes=:prazo_inscricoes, meses_duracao=:meses_duracao, carga_horaria=:carga_horaria, remuneracao=:remuneracao, area=:area WHERE idvaga=:idvaga ";
+        $prepare = $this->connection->prepare($query);
+        $prepare->bindValue(':meses_duracao', $dados['meses_duracao']);
+        $prazo_inscricoes = date_create($dados['prazo_inscricoes']);
+        $prepare->bindValue(':prazo_inscricoes', date_format($prazo_inscricoes, 'Y-m-d'));
+        $prepare->bindValue(':descricao', $dados['descricao']);
+        $prepare->bindValue(':titulo', $dados['titulo']);
+        $prepare->bindValue(':carga_horaria', $dados['carga_horaria']);
+        $prepare->bindValue(':remuneracao', $dados['remuneracao']);
+        $prepare->bindValue(':area', $dados['area']);
+        $prepare->bindValue(':idvaga', $idvaga);
+        
+        return $prepare->execute();
+    }
+
+    public function deletar($idvaga) {
+        $query = "DELETE * FROM vaga WHERE idvaga = :idvaga";
+        $prepare = $this->connection->prepare($query);
+        $prepare->bindValue(':idvaga', $idvaga);
+        return $prepare->execute();
     }
 }

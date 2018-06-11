@@ -1,4 +1,4 @@
-<form action="/vagas/criarVaga.php" method="post">
+<form action="/vagas/editarVagas.php" method="post">
     <div>
         <label for="titulo">Título</label>
         <input type="text" name="titulo" id="titulo">
@@ -34,5 +34,6 @@
         <input type="value" name="meses_duracao" id="meses_duracao">
     </div>
 
-    <input type="submit" value="Submeter">
+    <input type="hidden" name="id" value=<?php echo $_GET['id'];?>
+    <input type="submit" name="update" value="Update">
 </form>
