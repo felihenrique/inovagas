@@ -4,7 +4,7 @@
 	$vagaRepo = new VagaRepository();
 	 if (isset($_GET['idvaga']))
 	{
-		$vagas = $vagaRepo->deletar($idvaga);
+		$vagas = $vagaRepo->deletar($_GET['idvaga']);
 	} else{
 		echo "<script>"
             . "alert('Não foi possivel deletar!');"

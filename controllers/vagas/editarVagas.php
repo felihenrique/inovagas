@@ -1,17 +1,14 @@
 <?php
-
-	$idvaga = $_GET['idvaga'];
+	
 	require_once("VagaRepository.php");
 	$vagaRepo = new VagaRepository();
-	if(isset($idvaga))
-	{
-		$vagas = $vagaRepo->buscarPorId($idvaga);
-	}
+	$vagas = $vagaRepo->buscarPorId($_GET['idvaga']);
+	
     if(is_post()) {
 	    if($vagaRepo->alterar($_POST,$idvaga)) {
-	        header('Location:/vagas/criarVaga.php',array('vaga' => $vaga));
+	        header('Location:/vagas/alterarVaga.php',array('vagas' => $vagas));
 	    }
 	}
 	else {
-	    render_view("/vagas/criarVaga.php");
+	    render_view("/vagas/alterarVaga.php");
 	}

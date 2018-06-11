@@ -20,8 +20,8 @@
 		<td><?php echo $vaga['meses_duracao'] ?></td>
 		<td><?php echo $vaga['data_cadastro'] ?></td>
 		<td>
-			<a href="/vagas/alterarVaga.php?idvaga=$res[idvaga]">Alterar</a> 
-		 	<a href="/vagas/delete.php?idvaga=$res[idvaga]" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a>
+			<a href="editarVagas.php?idvaga=<?php echo $vaga['idvaga']; ?>">Alterar</a> 
+		 	<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga']; ?>" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a>
 		</td>
 	</tr>
 <?php } ?>
