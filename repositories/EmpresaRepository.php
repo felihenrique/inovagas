@@ -37,16 +37,18 @@ class EmpresaRepository extends Repository {
     }
 
     public function listarPreCadastradas() {
-        $query = "SELECT * FROM usuario U INNER JOIN empresa E ON U.idusuario = E.idusuario WHERE status_aprovacao = :status_aprovacao";
+        $query = "SELECT * FROM usuario U INNER JOIN empresa E ON U.idusuario = E.idusuario WHERE status_aprovacao IS NULL";
         try {
-            $result = $this->connection->execute($query, [
-                ':status_aprovacao' => '0'
-            ]); 
+            $result = $this->connection->execute($query); 
             return $result;
         }
         catch(Exception $e) {
             throw new Exception("Erro: " . $e->getMessage());
         }
+    }
+
+    public function atualizarStatus() {
+        $query = "UPDATE empresa SET s" 
     }
 }
         
