@@ -31,4 +31,8 @@ class AdminRepository extends Repository {
             return false;
         }
     }
+
+    public function buscarPorId($idusuario) {
+
+    }
 }
