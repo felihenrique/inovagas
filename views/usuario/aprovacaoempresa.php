@@ -18,8 +18,8 @@
       </button>
       </td>
 			<td>
-			<button type="button" class="btn btn-success btn-sm">Aprovar</button>
-			<button type="button" class="btn btn-danger btn-sm">Recusar</button>
+			 <a href="aceitarempresa.php?status_aprovacao=<?php echo $aceitarempresa['status_aprovacao']; ?>">Aceitar</a>
+       <a href="recusarempresa.php?status_aprovacao=<?php echo $recusarempresa['status_aprovacao']; ?>">Recusar</a>
 			</td>
 		</tr>
 	<?php } ?>
@@ -27,7 +27,8 @@
 </table>
 
 <!-- Aceitar -->
-
+<button type="button" class="btn btn-success btn-sm">Aprovar</button>
+<button type="button" class="btn btn-danger btn-sm">Recusar</button>
 
 <!-- Mostrar detalhes -->
 <?php foreach ($empresas as $empresa) { ?>

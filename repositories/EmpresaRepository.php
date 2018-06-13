@@ -47,6 +47,10 @@ class EmpresaRepository extends Repository {
         }
     }
 
+    public function atualizarStatus() {
+        
+    }
+
     public function aceitarEmpresa() {
         $query = "UPDATE empresa SET status_aprovacao = 1"; 
         try {
