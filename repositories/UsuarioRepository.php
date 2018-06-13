@@ -30,4 +30,33 @@ class UsuarioRepository extends Repository {
             return null;
         }
     }
+
+    public function getPerfil($idusuario) {
+        $queryAdm = "SELECT * FROM usuario u INNER JOIN administrador a
+        ON u.idusuario = a.idusuario
+        WHERE u.idusuario = :idusuario";
+        $queryEmpresa = "SELECT * FROM usuario u INNER JOIN empresa e
+        ON u.idusuario = e.idusuario
+        WHERE u.idusuario = :idusuario";
+        try {
+            $resultAdm = $this->connection->execute($queryAdm, [
+                'idusuario' => $idusuario
+            ]);
+            $resultEmpresa = $this->connection->execute($queryEmpresa, [
+                'idusuario' => $idusuario
+            ]);
+            if(count($resultAdm) > 0) {
+                return "administrador";
+            } 
+            else if(count($resultEmpresa) > 0) {
+                return "empresa";
+            }
+            else {
+                return "aluno";
+            }
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro na execução: " . $e->getMessage());
+        }
+    }
 }

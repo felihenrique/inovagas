@@ -10,6 +10,9 @@ if(!file_exists('controllers/' . $arquivo_req)) {
     die();
 }
 session_start();
+if(!isset($_SESSION['logged'])) {
+    $_SESSION['logged'] = false;
+}
 $conf = parse_ini_file('CONFIGURACOES.ini');
 
 $views = PATH_SEPARATOR . './views';

@@ -1,11 +1,3 @@
-<div class="form-row">
-    <div class="form-group col-md-6"> 
-        <label for="senha">Senha</label>
-        <input required class="form-control" type="password" name="senha" id="senha" 
-        placeholder="Digite a senha que será usada para autenticação">
-    </div>
-</div>
-
 <div class="form-group">
     <label for="email">Email</label>
     <input required type="text" class="form-control" name="email" id="email" placeholder="Digite seu email"
@@ -36,5 +28,7 @@
         <input required type="text" class="form-control" name="estado" id="estado"
         value="<?php echo $dados['estado'] ?>">
     </div>
+
+    <input type="hidden" name="idusuario" value="<?php echo $_SESSION['idusuario'] ?>">
 </div>
 

@@ -9,6 +9,6 @@ if(is_post()) {
 }
 else {
     render_view("usuario/editaradmin.php", [
-        'dados' => $adminRepo->buscarPorId($_GET['idusuario'])
+        'dados' => $adminRepo->buscarPorId($_SESSION['idusuario'])
     ]);
 }
