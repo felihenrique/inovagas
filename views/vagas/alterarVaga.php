@@ -1,5 +1,5 @@
+<h5 class="card-title">Atualizar vaga</h5>
 <form action="/vagas/editarVagas.php" method="post">
-    <h1>Alterar</h1>
     <div>
         <label for="titulo">Título</label>
         <input type="text" name="titulo" id="titulo">

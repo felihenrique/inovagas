@@ -16,6 +16,13 @@ class VagaRepository extends Repository {
                 ':carga_horaria' => $dados['carga_horaria'],
                 ':meses_duracao' => $dados['meses_duracao']
             ]);
+            $idvaga = $this->connection->getPDO()->lastInsertId();
+            $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
+            VALUES (:idvaga, :idstatus, NOW())", 
+            [
+                ':idvaga' => $idvaga,
+                ':idstatus' => $idstatus,
+            ]);
             $this->connection->getPDO()->commit();
             return true;
         }
