@@ -6,16 +6,16 @@
     </div>
 </form>
 
-<table>
+<table class="table table-striped">
 <tr>
-	<th>Titulo</th>
-	<th>Descrição</th>
-	<th>Área</th>
-	<th>Prazo inscrições</th>
-	<th>Remuneração</th>
-	<th>Carga hóraria</th>
-	<th>Meses Duração</th>
-	<th>Data Cadastro</th>
+	<th scope="col">Titulo</th>
+	<th scope="col">Descrição</th>
+	<th scope="col">Área</th>
+	<th scope="col">Prazo inscrições</th>
+	<th scope="col">Remuneração</th>
+	<th scope="col">Carga hóraria</th>
+	<th scope="col">Meses Duração</th>
+	<th scope="col">Data Cadastro</th>
 </tr>
 <?php foreach ($vagas as $vaga) { ?>
 	<tr>
