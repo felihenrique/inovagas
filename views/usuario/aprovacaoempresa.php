@@ -26,9 +26,10 @@
   </tbody>
 </table>
 
-<!-- Button trigger modal -->
+<!-- Aceitar -->
 
 
+<!-- Mostrar detalhes -->
 <?php foreach ($empresas as $empresa) { ?>
 
 <!-- Modal -->
@@ -62,9 +63,6 @@
           <?php echo $empresa['cidade'] ?><br>
           <label><strong>Estado: </strong></label>
           <?php echo $empresa['estado'] ?><br>
-
-
-
 
       </div>
       <div class="modal-footer">
