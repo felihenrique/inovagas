@@ -35,6 +35,6 @@
         <input type="value" name="meses_duracao" id="meses_duracao">
     </div>
     
-    <input type="hidden" name="id" value="<?php echo $_GET['idvaga']; ?>">
-    <input type="submit" name="update" value="Update">
+    <input type="hidden" name="idvaga" value="<?php echo $_GET['idvaga']; ?>">
+    <input type="submit" value="Update">
 </form>

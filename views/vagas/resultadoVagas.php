@@ -1,11 +1,3 @@
-<form action="/vagas/buscarVaga.php" method="post">
-    <div>
-        <label for="busca">Buscar</label>
-        <input type="text" name="titulo" id="titulo">
-        <input type="submit" value="Buscar">
-    </div>
-</form>
-
 <table>
 <tr>
 	<th>Titulo</th>
@@ -17,7 +9,7 @@
 	<th>Meses Duração</th>
 	<th>Data Cadastro</th>
 </tr>
-<?php foreach ($vagas as $vaga) { ?>
+<?php foreach ($listaVagas as $vaga) { ?>
 	<tr>
 		<td><?php echo $vaga['titulo'] ?></td>
 		<td><?php echo $vaga['descricao'] ?></td>

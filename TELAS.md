@@ -1,5 +1,5 @@
 - Criação de perfil (Para todos. Diferente para empresa, aluno e administrador). (PHILIPE) (CONCLUIDO)
-- Criação/Edição de vaga (Para a empresa) (LARISSA)
+- Criação/Edição de vaga (Para a empresa) (LARISSA) (CONCLUIDO)
 - Listagem/Busca de vagas (Para todos) (LARISSA)
 - Listagem de vagas inscritas (Para os alunos). Aqui o aluno pode ver as vagas que se candidatou e cancelar o interesse em vagas.
 - Login no sistema (Para todos). (PHILIPE) (CONCLUIDO)
