@@ -60,29 +60,67 @@ class EmpresaRepository extends Repository {
             throw new Exception("Erro: " . $e->getMessage());
         }
     }
-
- /*   }
-
-    public function aceitarEmpresa() {
-        $query = "UPDATE empresa SET status_aprovacao = 1"; 
+  
+   public function buscarPorId($idusuario) {
+        $query = "SELECT * FROM usuario INNER JOIN empresa 
+        WHERE usuario.idusuario = :idusuario";
         try {
-            $result = $this->connection->execute($query); 
-            return $result;
+            $result = $this->connection->execute($query, [
+                'idusuario' => $idusuario
+            ]);
+            if(count($result) > 0) {
+              return $result[0];
+            }
+            else {
+              return null;
+            }
+         }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+     
+    }
+
+    public function editar($dados) {
+        $queryUser = "UPDATE usuario SET 
+            email = :email,
+            rua = :rua,
+            bairro = :bairro,
+            cidade = :cidade,
+            estado = :estado
+            WHERE idusuario = :idusuario
+        ";
+        $queryEmpresa = "UPDATE empresa SET
+            razao_social = :razao_social,
+            cnpj = :cnpj,
+            area = :area,
+            nome_fantasia = :nome_fantasia
+            WHERE idusuario = :idusuario
+        ";
+        try {
+            $this->connection->getPDO()->beginTransaction();
+            $this->connection->execute($queryUser, [
+                'email' => $dados['email'],
+                'rua' => $dados['rua'],
+                'bairro' => $dados['bairro'],
+                'cidade' => $dados['cidade'],
+                'estado' => $dados['estado'],
+                'idusuario' => $dados['idusuario']
+            ]);
+            $this->connection->execute($queryEmpresa, [
+                'razao_social' => $dados['razao_social'],
+                'cnpj' => $dados['cnpj'],
+                'area' => $dados['area'],
+                'nome_fantasia' => $dados['nome_fantasia'],
+                'idusuario' => $dados['idusuario']
+            ]);
+            
+            $this->connection->getPDO()->commit();
+            return true;
         }
         catch(Exception $e) {
+            $this->connection->getPDO()->rollBack();
             throw new Exception("Erro: " . $e->getMessage());
         }
     }
-
-    public function recusarEmpresa() {
-        $query = "UPDATE empresa SET status_aprovacao = 0"; 
-        try {
-            $result = $this->connection->execute($query); 
-            return $result;
-        }
-        catch(Exception $e) {
-            throw new Exception("Erro: " . $e->getMessage());
-        }
-    }*/
 }
-        
