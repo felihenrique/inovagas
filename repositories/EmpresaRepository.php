@@ -36,23 +36,49 @@ class EmpresaRepository extends Repository {
         }
     }
 
-    public function buscarPorId($idusuario) {
+    public function listarPreCadastradas() {
+        $query = "SELECT * FROM usuario U INNER JOIN empresa E ON U.idusuario = E.idusuario WHERE status_aprovacao IS NULL";
+        try {
+            $result = $this->connection->execute($query); 
+            return $result;
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
+
+    public function atualizarStatus($idusuario, $novo_status) {
+        $query = "UPDATE empresa SET status_aprovacao = :novo_status WHERE idusuario = :idusuario"; 
+        try {
+            $result = $this->connection->execute($query, [
+                'novo_status' => $novo_status,
+                'idusuario' => $idusuario
+            ]); 
+            return $result;
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
+  
+   public function buscarPorId($idusuario) {
         $query = "SELECT * FROM usuario INNER JOIN empresa 
         WHERE usuario.idusuario = :idusuario";
         try {
             $result = $this->connection->execute($query, [
                 'idusuario' => $idusuario
             ]);
-        }
+            if(count($result) > 0) {
+              return $result[0];
+            }
+            else {
+              return null;
+            }
+         }
         catch(Exception $e) {
             throw new Exception("Erro: " . $e->getMessage());
         }
-        if(count($result) > 0) {
-            return $result[0];
-        }
-        else {
-            return null;
-        }
+     
     }
 
     public function editar($dados) {
