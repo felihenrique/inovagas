@@ -47,9 +47,21 @@ class EmpresaRepository extends Repository {
         }
     }
 
-    public function atualizarStatus() {
-        
+    public function atualizarStatus($idusuario, $novo_status) {
+        $query = "UPDATE empresa SET status_aprovacao = :novo_status WHERE idusuario = :idusuario"; 
+        try {
+            $result = $this->connection->execute($query, [
+                'novo_status' => $novo_status,
+                'idusuario' => $idusuario
+            ]); 
+            return $result;
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
     }
+
+ /*   }
 
     public function aceitarEmpresa() {
         $query = "UPDATE empresa SET status_aprovacao = 1"; 
@@ -71,6 +83,6 @@ class EmpresaRepository extends Repository {
         catch(Exception $e) {
             throw new Exception("Erro: " . $e->getMessage());
         }
-    }
+    }*/
 }
         

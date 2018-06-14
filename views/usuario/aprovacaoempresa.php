@@ -18,17 +18,14 @@
       </button>
       </td>
 			<td>
-			 <a href="aceitarempresa.php?status_aprovacao=<?php echo $aceitarempresa['status_aprovacao']; ?>">Aceitar</a>
-       <a href="recusarempresa.php?status_aprovacao=<?php echo $recusarempresa['status_aprovacao']; ?>">Recusar</a>
+			 <a class="btn btn-success btn-sm" href="atualizarstatus.php?novo_status=1&idusuario=<?php echo $empresa['idusuario']?>">Aprovar</a>
+       <a class="btn btn-danger btn-sm" href="atualizarstatus.php?novo_status=0&idusuario=<?php echo $empresa['idusuario']?>">Recusar</a>
 			</td>
 		</tr>
 	<?php } ?>
   </tbody>
 </table>
 
-<!-- Aceitar -->
-<button type="button" class="btn btn-success btn-sm">Aprovar</button>
-<button type="button" class="btn btn-danger btn-sm">Recusar</button>
 
 <!-- Mostrar detalhes -->
 <?php foreach ($empresas as $empresa) { ?>
@@ -67,7 +64,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
