@@ -17,11 +17,21 @@ class VagaRepository extends Repository {
                 ':meses_duracao' => $dados['meses_duracao']
             ]);
             $idvaga = $this->connection->getPDO()->lastInsertId();
+            
+            $query = "SELECT * FROM vaga_status WHERE nome='Criada'";
+            try {
+                $idstatus = $this->connection->execute($query);
+            }
+            catch(Exception $e) {
+                throw new Exception("Erro: " . $e->getMessage());
+            }
+          //  var_dump($idstatus[0]["idstatus"]);
+          //  die();
             $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
             VALUES (:idvaga, :idstatus, NOW())", 
             [
                 ':idvaga' => $idvaga,
-                ':idstatus' => $idstatus,
+                ':idstatus' => $idstatus[0]["idstatus"],
             ]);
             $this->connection->getPDO()->commit();
             return true;
