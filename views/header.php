@@ -23,9 +23,6 @@
           Vagas
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/vagas/criarVaga.php">
-          Criar
-          </a>
           <a class="dropdown-item" href="/vagas/listarVagas.php">
           Listar
           </a>
