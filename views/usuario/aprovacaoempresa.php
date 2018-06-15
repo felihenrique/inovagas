@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th scope="col">Nome</th>
-      <th scope="col">E-mail</th>
+      <th scope="col">CNPJ</th>
       <th></th>
       <th scope="col">Aprovação</th>
     </tr>
@@ -11,7 +11,7 @@
     <?php foreach ($empresas as $empresa) { ?>
 		<tr>
 			<td><?php echo $empresa['nome_fantasia'] ?></td>
-			<td><?php echo $empresa['email'] ?></td>
+			<td><?php echo $empresa['cnpj'] ?></td>
 			<td>
       <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#detalhes<?php echo $empresa['idusuario'] ?>">
         Detalhes

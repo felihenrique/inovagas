@@ -53,4 +53,20 @@ class VagaRepository extends Repository {
             return null;
         }
     }
+
+    public function listarCandidatos($idvaga) {
+        $query = "SELECT * 
+                  FROM candidatura C INNER JOIN aluno A
+                  ON C.idaluno = A.idusuario 
+                  WHERE idvaga = :idvaga";
+        try {
+            $result = $this->connection->execute($query, [
+                'idvaga' => $idvaga
+            ]); 
+            return $result;
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
 }
