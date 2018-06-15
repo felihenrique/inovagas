@@ -11,4 +11,4 @@
 	- Seleção dos alunos que participarão da seleção.
 	- Preenchimento do horário, local e data para a entrevista para cada aluno.
 	- Preenchimento em lote do horário, local e data.
-- Listagem de candidatos (Para a empresa).
+- Listagem de candidatos (Para a empresa). (JESSIELY)
