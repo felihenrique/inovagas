@@ -1,3 +1,4 @@
+<h5 class="card-title">Cadastro de vaga</h5>
 <form action="/vagas/criarVaga.php" method="post">
     <div>
         <label for="titulo">Título</label>

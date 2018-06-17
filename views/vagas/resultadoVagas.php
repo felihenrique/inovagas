@@ -1,23 +1,15 @@
-<form action="/vagas/buscarVaga.php" method="post">
-    <div>
-        <label for="busca">Buscar</label>
-        <input type="text" name="titulo" id="titulo">
-        <input type="submit" value="Buscar">
-    </div>
-</form>
-
-<table class="table table-striped">
+<table>
 <tr>
-	<th scope="col">Titulo</th>
-	<th scope="col">Descrição</th>
-	<th scope="col">Área</th>
-	<th scope="col">Prazo inscrições</th>
-	<th scope="col">Remuneração</th>
-	<th scope="col">Carga hóraria</th>
-	<th scope="col">Meses Duração</th>
-	<th scope="col">Data Cadastro</th>
+	<th>Titulo</th>
+	<th>Descrição</th>
+	<th>Área</th>
+	<th>Prazo inscrições</th>
+	<th>Remuneração</th>
+	<th>Carga hóraria</th>
+	<th>Meses Duração</th>
+	<th>Data Cadastro</th>
 </tr>
-<?php foreach ($vagas as $vaga) { ?>
+<?php foreach ($listaVagas as $vaga) { ?>
 	<tr>
 		<td><?php echo $vaga['titulo'] ?></td>
 		<td><?php echo $vaga['descricao'] ?></td>

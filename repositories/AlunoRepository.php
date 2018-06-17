@@ -106,4 +106,5 @@ class AlunoRepository extends Repository {
             throw new Exception("Erro: " . $e->getMessage());
         }
     }
+
 }

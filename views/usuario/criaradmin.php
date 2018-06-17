@@ -1,4 +1,4 @@
-<h5 class="card-title">Editar perfil</h5>
+<h5 class="card-title">Cadastro de administradores</h5>
 <form action="criaradmin.php" method="post">
     <?php require_once('views/usuario/criarusuario.php'); ?>
 
