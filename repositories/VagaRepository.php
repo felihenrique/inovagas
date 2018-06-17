@@ -44,7 +44,7 @@ class VagaRepository extends Repository {
     }
 
     public function listar(){
-        $query = "SELECT vaga.idvaga, vaga.titulo, vaga.area, vaga.descricao, vaga.remuneracao, vaga.prazo_inscricoes, vaga.carga_horaria, vaga.meses_duracao, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome FROM vaga, vaga_historico, vaga_status WHERE vaga.idvaga=vaga_historico.idvaga AND vaga_status.idstatus=vaga_historico.idstatus";
+        $query = "SELECT vaga.idvaga, vaga.titulo, vaga.area, vaga.descricao, vaga.remuneracao, vaga.prazo_inscricoes, vaga.carga_horaria, vaga.meses_duracao, vaga.data_cadastro, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome FROM vaga, vaga_historico, vaga_status WHERE vaga.idvaga=vaga_historico.idvaga AND vaga_status.idstatus=vaga_historico.idstatus";
          try {
             $result = $this->connection->execute($query);
             return $result;

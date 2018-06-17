@@ -12,3 +12,10 @@
 	- Preenchimento do horário, local e data para a entrevista para cada aluno.
 	- Preenchimento em lote do horário, local e data.
 - Listagem de candidatos (Para a empresa). (JESSIELY)
+
+
+
+------------------------------------------------------------------
+ - Aparecer para a empresa se ela está aprovada ou não
+ - A empresa já pode cadastrar vaga antes de estar aprovada pelo administrador
+ - Aparecer o nome da empresa na listagem das vagas
