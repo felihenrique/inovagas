@@ -1,7 +1,7 @@
-<h5 class="card-title">Cadastro de vaga</h5>
-<form action="/vagas/criarVaga.php" method="post">
-    
-    <div class="form-group">
+<h5 class="card-title">Atualizar vaga</h5>
+<form action="/vagas/editarVagas.php" method="post">
+
+     <div class="form-group">
         <label for="titulo">Título</label>
         <input required class="form-control" type="text" name="titulo" id="titulo" 
         placeholder="Qual título da vaga ?">
@@ -13,7 +13,6 @@
         placeholder="A qual área se refere a vaga ?">
     </div>
 
-    
     <div class="form-group">
         <label for="remuneracao">Remuneração</label>
         <input required class="form-control" type="text" name="remuneracao" id="remuneracao" 
@@ -43,7 +42,7 @@
         <input required class="form-control" type="text" name="meses_duracao" id="meses_duracao" 
         placeholder="Quantos meses de duração ?">
     </div>
-
-
-    <input class="btn btn-primary" type="submit" value="Submeter">
+    
+    <input type="hidden" name="idvaga" value="<?php echo $_GET['idvaga']; ?>">
+    <input class="btn btn-primary" type="submit" value="Atualizar">
 </form>

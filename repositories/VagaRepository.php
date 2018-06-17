@@ -1,6 +1,7 @@
 <?php
 require_once("Repository.php");
 class VagaRepository extends Repository {
+
     public function criar($dados) {
      $dados['prazo_inscricoes'] = converter_data($_POST['prazo_inscricoes']);
         try {
@@ -15,6 +16,23 @@ class VagaRepository extends Repository {
                 ':carga_horaria' => $dados['carga_horaria'],
                 ':meses_duracao' => $dados['meses_duracao']
             ]);
+            $idvaga = $this->connection->getPDO()->lastInsertId();
+            
+            $query = "SELECT * FROM vaga_status WHERE nome='Criada'";
+            try {
+                $idstatus = $this->connection->execute($query);
+            }
+            catch(Exception $e) {
+                throw new Exception("Erro: " . $e->getMessage());
+            }
+          //  var_dump($idstatus[0]["idstatus"]);
+          //  die();
+            $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
+            VALUES (:idvaga, :idstatus, NOW())", 
+            [
+                ':idvaga' => $idvaga,
+                ':idstatus' => $idstatus[0]["idstatus"],
+            ]);
             $this->connection->getPDO()->commit();
             return true;
         }
@@ -26,7 +44,7 @@ class VagaRepository extends Repository {
     }
 
     public function listar(){
-        $query = "SELECT * FROM vaga";
+        $query = "SELECT vaga.idvaga, vaga.titulo, vaga.area, vaga.descricao, vaga.remuneracao, vaga.prazo_inscricoes, vaga.carga_horaria, vaga.meses_duracao, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome FROM vaga, vaga_historico, vaga_status WHERE vaga.idvaga=vaga_historico.idvaga AND vaga_status.idstatus=vaga_historico.idstatus";
          try {
             $result = $this->connection->execute($query);
             return $result;
@@ -54,30 +72,21 @@ class VagaRepository extends Repository {
         }
     }
 
-    public function vagasCriadas() {
-        $query = "SELECT * FROM vaga INNER JOIN vaga_historico ON vaga.idvaga = vaga_historico.idvaga ";
-        try {
-            $result = $this->connection->execute($query); 
-            return $result;
-        }
-        catch(Exception $e) {
-            throw new Exception("Erro: " . $e->getMessage());
-        }
+     public function alterar($dados) {
+        $dados['prazo_inscricoes'] = converter_data($dados['prazo_inscricoes']);
+        $query = "UPDATE vaga SET titulo=:titulo, descricao=:descricao, prazo_inscricoes=:prazo_inscricoes, meses_duracao=:meses_duracao, carga_horaria=:carga_horaria, remuneracao=:remuneracao, area=:area WHERE idvaga=:idvaga ";
+        
+        
+        $this->connection->execute($query,$dados);
+        return true;
     }
 
-    public function listarCandidatos($idvaga) {
-        $query = "SELECT * 
-                  FROM candidatura C INNER JOIN aluno A
-                  ON C.idaluno = A.idusuario 
-                  WHERE idvaga = :idvaga";
-        try {
-            $result = $this->connection->execute($query, [
+    public function deletar($idvaga) {
+        $query = "DELETE FROM vaga WHERE idvaga = :idvaga";
+        $this->connection->execute($query,[
                 'idvaga' => $idvaga
-            ]); 
-            return $result;
-        }
-        catch(Exception $e) {
-            throw new Exception("Erro: " . $e->getMessage());
-        }
+        ]);
+        
+        return true;
     }
 }
