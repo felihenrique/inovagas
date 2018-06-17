@@ -14,10 +14,10 @@ class VagaRepository extends Repository {
                 ':descricao' => $dados['descricao'],
                 ':titulo' => $dados['titulo'],
                 ':carga_horaria' => $dados['carga_horaria'],
-                ':meses_duracao' => $dados['meses_duracao']
+                ':meses_duracao' => $dados['meses_duracao'],
             ]);
             $idvaga = $this->connection->getPDO()->lastInsertId();
-            
+
             $query = "SELECT * FROM vaga_status WHERE nome='Criada'";
             try {
                 $idstatus = $this->connection->execute($query);
@@ -89,4 +89,6 @@ class VagaRepository extends Repository {
         
         return true;
     }
+
+
 }

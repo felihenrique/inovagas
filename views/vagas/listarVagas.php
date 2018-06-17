@@ -1,3 +1,10 @@
+<form class="form-inline form-group" action="/vagas/buscarVaga.php" method="post">
+    <div class="form-group">
+        <input class="form-control" type="text" name="titulo" id="titulo" placeholder="Buscar">
+        <input class="btn btn-primary" style="margin-left: 10px" type="submit" value="Buscar">
+    </div>
+</form>
+
 <table class="table table-striped">
 <thead>
 	<tr>

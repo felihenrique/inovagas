@@ -19,3 +19,4 @@
  - Aparecer para a empresa se ela está aprovada ou não
  - A empresa já pode cadastrar vaga antes de estar aprovada pelo administrador
  - Aparecer o nome da empresa na listagem das vagas
+ - Vaga não recebe id da empresa
