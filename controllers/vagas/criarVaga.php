@@ -5,7 +5,6 @@ if(is_post()) {
     $vagaRepo = new VagaRepository();
     if($vagaRepo->criar($_POST)) {
         header('Location:/vagas/criarVaga.php');
-       
     }
 }
 else {

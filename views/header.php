@@ -23,9 +23,6 @@
           Vagas
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/vagas/criarVaga.php">
-          Criar
-          </a>
           <a class="dropdown-item" href="/vagas/listarVagas.php">
           Listar
           </a>
@@ -49,7 +46,11 @@
         </div>
       </li>
     </ul>
-    <?php if(isset($_SESSION['logged']) && $_SESSION['logged']) { ?> 
+    <?php if($_SESSION['logged']) { ?>
+    <a class="nav-item" href="/usuario/editarperfil.php" style="margin-right: 10px">
+    <i class="fas fa-user-alt"></i>
+      Editar perfil
+    </a> 
     <a class="nav-item" href="/usuario/logout.php">
     <i class="fas fa-sign-out-alt"></i>
       Logout
