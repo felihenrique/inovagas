@@ -12,7 +12,7 @@
 		<ul>
 			<li><a href="/vagas/criarVaga.php">Criar vaga</a></li>
 			<li><a href="">Editar vaga</a></li>
-			<li><a href="">Vagas criadas</a></li>
+			<li><a href="/vagas/vagascriadas.php">Vagas criadas</a></li>
 			<li><a href="">Candidatos</a></li>
 		</ul>
 <?php } ?>

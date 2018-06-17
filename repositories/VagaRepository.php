@@ -54,6 +54,17 @@ class VagaRepository extends Repository {
         }
     }
 
+    public function vagasCriadas() {
+        $query = "SELECT * FROM vaga INNER JOIN vaga_historico ON vaga.idvaga = vaga_historico.idvaga ";
+        try {
+            $result = $this->connection->execute($query); 
+            return $result;
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
+
     public function listarCandidatos($idvaga) {
         $query = "SELECT * 
                   FROM candidatura C INNER JOIN aluno A

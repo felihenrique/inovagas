@@ -1,0 +1,9 @@
+INSERT INTO `inovagas`.`vaga_status` (`nome`) VALUES ('Criada');
+
+INSERT INTO `inovagas`.`vaga_status` (`nome`) VALUES ('Publicada');
+
+INSERT INTO `inovagas`.`vaga_status` (`nome`) VALUES ('Em seleção');
+
+INSERT INTO `inovagas`.`vaga_status` (`nome`) VALUES ('Finalizada');
+
+INSERT INTO `inovagas`.`vaga_status` (`nome`) VALUES ('Cancelada');
