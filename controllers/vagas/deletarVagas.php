@@ -1,5 +1,4 @@
 <?php
-
 	require_once("VagaRepository.php");
 	$vagaRepo = new VagaRepository();
 	if (isset($_GET['idvaga']))

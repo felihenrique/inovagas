@@ -44,6 +44,5 @@
         placeholder="Quantos meses de duração ?">
     </div>
 
-
     <input class="btn btn-primary" type="submit" value="Submeter">
 </form>

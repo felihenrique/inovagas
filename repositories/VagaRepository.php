@@ -1,23 +1,27 @@
 <?php
 require_once("Repository.php");
 class VagaRepository extends Repository {
-
-    public function criar($dados) {
+    
+    public function criar($dados, $idempresa) {
      $dados['prazo_inscricoes'] = converter_data($_POST['prazo_inscricoes']);
         try {
             $this->connection->getPDO()->beginTransaction();
-            $this->connection->execute("INSERT INTO vaga(remuneracao, prazo_inscricoes, area, descricao, titulo, carga_horaria, meses_duracao, data_cadastro) #add idEmpresa ainda
-            VALUES (:remuneracao, :prazo_inscricoes, :area, :descricao, :titulo, :carga_horaria, :meses_duracao, NOW())", [
+            $this->connection->execute("INSERT INTO vaga(remuneracao, prazo_inscricoes, area, descricao, titulo, carga_horaria, meses_duracao, data_cadastro, idempresa)
+            VALUES (:remuneracao, :prazo_inscricoes, :area, :descricao, :titulo, :carga_horaria, :meses_duracao, NOW(), :idempresa)", [
                 ':remuneracao' => $dados['remuneracao'],
                 ':prazo_inscricoes' => $dados['prazo_inscricoes'],
                 ':area' => $dados['area'],
                 ':descricao' => $dados['descricao'],
                 ':titulo' => $dados['titulo'],
                 ':carga_horaria' => $dados['carga_horaria'],
-                ':meses_duracao' => $dados['meses_duracao']
+                ':meses_duracao' => $dados['meses_duracao'],
+                ':idempresa' => $idempresa
             ]);
+
+            //RECUPERA ID DA VAGA
             $idvaga = $this->connection->getPDO()->lastInsertId();
             
+            //STATUS
             $query = "SELECT * FROM vaga_status WHERE nome='Criada'";
             try {
                 $idstatus = $this->connection->execute($query);
@@ -25,8 +29,8 @@ class VagaRepository extends Repository {
             catch(Exception $e) {
                 throw new Exception("Erro: " . $e->getMessage());
             }
-          //  var_dump($idstatus[0]["idstatus"]);
-          //  die();
+            
+            //CRIA HISTORICO
             $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
             VALUES (:idvaga, :idstatus, NOW())", 
             [
@@ -43,10 +47,14 @@ class VagaRepository extends Repository {
         }
     }
 
-    public function listar(){
-        $query = "SELECT vaga.idvaga, vaga.titulo, vaga.area, vaga.descricao, vaga.remuneracao, vaga.prazo_inscricoes, vaga.carga_horaria, vaga.meses_duracao, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome FROM vaga, vaga_historico, vaga_status WHERE vaga.idvaga=vaga_historico.idvaga AND vaga_status.idstatus=vaga_historico.idstatus";
+    public function listar($idempresa){
+      //  var_dump($idempresa);
+      //  die();
+        $query = "SELECT vaga.*, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome, empresa.idusuario FROM vaga, vaga_historico, vaga_status, empresa WHERE vaga.idvaga=vaga_historico.idvaga AND vaga_status.idstatus=vaga_historico.idstatus AND vaga.idempresa= '{$idempresa}'";
          try {
-            $result = $this->connection->execute($query);
+            $result = $this->connection->execute($query, [
+                'idempresa' => $idempresa
+            ]);
             return $result;
         }
         catch(Exception $e) {
@@ -72,10 +80,9 @@ class VagaRepository extends Repository {
         }
     }
 
-     public function alterar($dados) {
+    public function alterar($dados) {
         $dados['prazo_inscricoes'] = converter_data($dados['prazo_inscricoes']);
         $query = "UPDATE vaga SET titulo=:titulo, descricao=:descricao, prazo_inscricoes=:prazo_inscricoes, meses_duracao=:meses_duracao, carga_horaria=:carga_horaria, remuneracao=:remuneracao, area=:area WHERE idvaga=:idvaga ";
-        
         
         $this->connection->execute($query,$dados);
         return true;

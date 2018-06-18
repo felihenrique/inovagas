@@ -1,6 +1,7 @@
 <?php
 require_once("Repository.php");
 class EmpresaRepository extends Repository {
+    
     public function criar($dados) {
         $dados['senha'] = password_hash($_POST['senha'], PASSWORD_BCRYPT);
         $dados['data_nascimento'] = converter_data($_POST['data_nascimento']);
@@ -78,7 +79,6 @@ class EmpresaRepository extends Repository {
         catch(Exception $e) {
             throw new Exception("Erro: " . $e->getMessage());
         }
-     
     }
 
     public function editar($dados) {

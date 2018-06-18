@@ -38,6 +38,7 @@ class UsuarioRepository extends Repository {
         $queryEmpresa = "SELECT * FROM usuario u INNER JOIN empresa e
         ON u.idusuario = e.idusuario
         WHERE u.idusuario = :idusuario";
+        
         try {
             $resultAdm = $this->connection->execute($queryAdm, [
                 'idusuario' => $idusuario
