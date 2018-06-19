@@ -12,7 +12,7 @@
 			<td><?php echo $vaga['titulo'] ?></td>
       <td><?php echo $vaga['idempresa'] ?></td>
       <td>
-        <a class="btn btn-success btn-sm" href="/usuario/candidatar-se.php?idvaga=<?php echo $vaga['idvaga'] ?>&idusuario=<?php echo $_SESSION['idusuario']?>">Aprovar</a>
+        <a class="btn btn-success btn-sm" href="/usuario/candidatar-se.php?idvaga=<?php echo $vaga['idvaga'] ?>&idusuario=<?php echo $_SESSION['idusuario']?>">Candidatar-se</a>
       </td>
 		</tr>
 	<?php } ?>
