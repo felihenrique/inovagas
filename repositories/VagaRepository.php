@@ -96,4 +96,33 @@ class VagaRepository extends Repository {
         
         return true;
     }
+
+    public function cancelar($idvaga) {
+         $this->connection->getPDO()->beginTransaction();
+         try {   
+            //STATUS
+            $query = "SELECT * FROM vaga_status WHERE nome='Cancelada'";
+            try {
+                $idstatus = $this->connection->execute($query);
+            }
+            catch(Exception $e) {
+                throw new Exception("Erro: " . $e->getMessage());
+            }
+            
+            //CRIA NOVO HISTORICO
+            $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
+            VALUES (:idvaga, :idstatus, NOW())", 
+            [
+                ':idvaga' => $idvaga,
+                ':idstatus' => $idstatus[0]["idstatus"],
+            ]);
+            $this->connection->getPDO()->commit();
+            return true;
+        }
+        catch(Exception $e) {
+            $this->connection->getPDO()->rollBack();
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
