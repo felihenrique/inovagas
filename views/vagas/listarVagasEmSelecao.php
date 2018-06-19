@@ -28,7 +28,7 @@
 				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Deletar</a>
 				<a href="cancelarVaga.php?idvaga=<?php echo $vaga['idvaga'];?>">Cancelar</a>
 				<a href="listarcandidatos.php?idvaga=<?php echo $vaga['idvaga'];?>&selecao=1">Selecionar candidatos</a>
-                <a href="fasedeentrevista.php?idvaga=<?php echo $vaga['idvaga'];?>">Passar para a fase de entrevista</a>
+				<a href="finalizarvaga.php?idvaga=<?php echo $vaga['idvaga'];?>">Finalizar vaga</a>
 			</td>
 		</tr>
 	<?php } ?>

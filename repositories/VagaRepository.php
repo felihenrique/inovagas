@@ -152,14 +152,18 @@ class VagaRepository extends Repository {
         return true;
     }
 
-    public function listarCandidatos($idvaga) {
+    public function listarCandidatos($idvaga, $entrevista) {
         $query = "SELECT C.idcandidatura, A.nome, A.semestre_inicio, A.ano_inicio, 
         A.curso, A.data_nascimento 
         FROM candidatura C 
         INNER JOIN aluno A ON A.idusuario = C.idaluno
         INNER JOIN vaga V ON V.idvaga = C.idvaga
-        WHERE V.idvaga = :idvaga
-        ";
+        WHERE V.idvaga = :idvaga";
+        if($entrevista) {
+            $query .= " AND NOT EXISTS(SELECT identrevista 
+                FROM entrevista E WHERE E.idcandidatura = C.idcandidatura)";   
+        }
+        
          try {
             $result = $this->connection->execute($query, [
                 'idvaga' => $idvaga
@@ -196,7 +200,7 @@ class VagaRepository extends Repository {
         FROM vaga
         WHERE vaga.idempresa=:idempresa
         AND EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idvaga = vaga.idvaga AND vh.idstatus = 3)
-        AND NOT EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idstatus = 5 AND vh.idvaga = vaga.idvaga)
+        AND NOT EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idstatus IN (5, 4) AND vh.idvaga = vaga.idvaga)
         ORDER BY titulo";
         try {
             $result = $this->connection->execute($query, [
@@ -223,42 +227,57 @@ class VagaRepository extends Repository {
     }
 
     public function cancelar($idvaga) {
-            //CRIA NOVO HISTORICO
-            $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
-            VALUES (:idvaga, :idstatus, NOW())", 
-            [
-                ':idvaga' => $idvaga,
-                ':idstatus' => 5,
-            ]);
-            return true;
+        //CRIA NOVO HISTORICO
+        $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
+        VALUES (:idvaga, :idstatus, NOW())", 
+        [
+            ':idvaga' => $idvaga,
+            ':idstatus' => 5,
+        ]);
+        return true;
     }
 
     public function publicar($idvaga) {
-         $this->connection->getPDO()->beginTransaction();
-         try {   
-            //STATUS
-            $query = "SELECT * FROM vaga_status WHERE nome='Publicada'";
-            try {
-                $idstatus = $this->connection->execute($query);
-            }
-            catch(Exception $e) {
-                throw new Exception("Erro: " . $e->getMessage());
-            }
-            
-            //CRIA NOVO HISTORICO
-            $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
-            VALUES (:idvaga, :idstatus, NOW())", 
-            [
-                ':idvaga' => $idvaga,
-                ':idstatus' => $idstatus[0]["idstatus"],
+        //CRIA NOVO HISTORICO
+        $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
+        VALUES (:idvaga, :idstatus, NOW())", 
+        [
+            ':idvaga' => $idvaga,
+            ':idstatus' => 2,
+        ]);
+        return true;
+    }
+
+    public function cadastrarEntrevistaEmLote($dados) {
+        
+        $this->connection->getPDO()->beginTransaction();
+        try {
+           $queryEntrevista = "INSERT INTO entrevista(local, mensagem, idcandidatura, data)
+           VALUES (:local, :mensagem, :idcandidatura, :data)";
+           foreach($dados['listaalunos'] as $aluno) {
+            $this->connection->execute($queryEntrevista, [
+                'local' => $dados['local'],
+                'mensagem' => $dados['mensagem'],
+                'idcandidatura' => $aluno,
+                'data' => converter_data($dados['data'])
             ]);
-            $this->connection->getPDO()->commit();
-            return true;
-        }
-        catch(Exception $e) {
-            $this->connection->getPDO()->rollBack();
-            echo $e->getMessage();
-            return false;
-        }
+           }
+           $this->connection->getPDO()->commit();
+           return true;
+       }
+       catch(Exception $e) {
+           $this->connection->getPDO()->rollBack();
+           echo $e->getMessage();
+           return false;
+       }
+    }
+
+    public function finalizarVaga($idvaga) {
+        $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
+        VALUES (:idvaga, :idstatus, NOW())", 
+        [
+            'idvaga' => $idvaga,
+            'idstatus' => 4,
+        ]);
     }
 }

@@ -30,15 +30,21 @@
 
 
 <?php if($selecao) { ?>
+<h5>Marcar entrevista</h3>
 <div class="form-row">
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-4">
     <label>Horario</label>
     <input type="text" class="form-control" name="horario" id="horario">
   </div>
 
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-4">
     <label>Data</label>
     <input type="text" class="form-control" name="data" id="data">
+  </div>
+
+  <div class="form-group col-md-4">
+    <label>Local</label>
+    <input type="text" class="form-control" name="local" id="local">
   </div>
 </div>
 <div class="form-group">

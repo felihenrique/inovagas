@@ -31,10 +31,6 @@
           </a>
           <a class="dropdown-item" href="/vagas/listarVagasCanceladas.php">
           Listar canceladas
-          </a>
-          <a class="dropdown-item" href="/vagas/listarVagasPublicadas.php">
-          Listar publicadas
-          </a>
           <a class="dropdown-item" href="/vagas/listarVagasEmSelecao.php">
           Listar em seleção
           </a>
@@ -59,6 +55,10 @@
       </li>
     </ul>
     <?php if(isset($_SESSION['logged']) && $_SESSION['logged']) { ?> 
+      <a class="nav-item" href="/usuario/editarperfil.php" style="margin-right: 10px">
+          <i class="fas fa-user-alt"></i>
+            Editar perfil
+      </a> 
     <a class="nav-item" href="/usuario/logout.php">
     <i class="fas fa-sign-out-alt"></i>
       Logout
