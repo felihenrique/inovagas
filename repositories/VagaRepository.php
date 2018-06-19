@@ -172,11 +172,11 @@ class VagaRepository extends Repository {
     }
 
     public function candidatar($idvaga, $idusuario) {
-        $query = "INSERT INTO candidatura (idvaga, idusuario) VALUES (:idvaga, :idusuario)";
+        $query = "INSERT INTO candidatura (idvaga, idaluno) VALUES (:idvaga, :idaluno)";
         try {
             $this->connection->execute($query, [
                     ':idvaga' => $idvaga,
-                    ':idusuario' => $idusuario
+                    ':idaluno' => $idusuario
                 ]);
         }
         catch(Exception $e) {
