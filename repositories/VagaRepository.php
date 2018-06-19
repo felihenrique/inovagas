@@ -172,12 +172,27 @@ class VagaRepository extends Repository {
     }
 
     public function candidatar($idvaga, $idusuario) {
-        $query = "UPDATE candidatura SET idvaga = :idvaga WHERE idaluno = :idusuario"; 
         try {
+            $this->connection->getPDO()->beginTransaction();
+            $this->connection->execute("INSERT INTO candidatura(idvaga, idusuario)
+                VALUES(:idvaga, :idusuario)", [
+                    ':idvaga' => $idvaga,
+                    ':idusuario' => $idusuario
+                ]);
             $result = $this->connection->execute($query, [
                 'idvaga' => $idvaga,
                 'idusuario' => $idusuario
             ]); 
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
+
+    public function vagasPublicadas(){
+        $query = "SELECT * FROM vaga INNER JOIN vaga_historico ON (vaga_historico.idvaga = vaga.idvaga) INNER JOIN vaga_status ON (vaga_historico.idstatus = vaga_status.idstatus) WHERE vaga_status.nome = 'Publicada'";
+        try {
+            $result = $this->connection->execute($query);
             return $result;
         }
         catch(Exception $e) {
