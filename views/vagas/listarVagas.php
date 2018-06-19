@@ -1,4 +1,5 @@
 <table class="table table-striped">
+<h5 class="card-title">Vagas TODAS MINHAS VAGAS</h5>
 <tr>
 	<th scope="col">Titulo</th>
 	<th scope="col">Descrição</th>
@@ -30,6 +31,9 @@
 			</td>
 			<td>
 				<a href="cancelarVaga.php?idvaga=<?php echo $vaga['idvaga'];?>" onClick="return confirm('Are you sure you want to cancel?')\">Cancelar</a>
+			</td>
+			<td>
+				<a href="publicarVaga.php?idvaga=<?php echo $vaga['idvaga'];?>" onClick="return confirm('Are you sure you want to delete?')\">Publicar</a>
 			</td>
 		</tr>
 	<?php } ?>

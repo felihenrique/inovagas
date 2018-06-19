@@ -27,7 +27,13 @@
           Criar
           </a>
           <a class="dropdown-item" href="/vagas/listarVagas.php">
-          Listar
+          Listar todas
+          </a>
+          <a class="dropdown-item" href="/vagas/listarVagasCanceladas.php">
+          Listar canceladas
+          </a>
+          <a class="dropdown-item" href="/vagas/listarVagasPublicadas.php">
+          Listar publicadas
           </a>
         </div>
       </li>
