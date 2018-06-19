@@ -172,17 +172,12 @@ class VagaRepository extends Repository {
     }
 
     public function candidatar($idvaga, $idusuario) {
+        $query = "INSERT INTO candidatura (idvaga, idusuario) VALUES (:idvaga, :idusuario)";
         try {
-            $this->connection->getPDO()->beginTransaction();
-            $this->connection->execute("INSERT INTO candidatura(idvaga, idusuario)
-                VALUES(:idvaga, :idusuario)", [
+            $this->connection->execute($query, [
                     ':idvaga' => $idvaga,
                     ':idusuario' => $idusuario
                 ]);
-            $result = $this->connection->execute($query, [
-                'idvaga' => $idvaga,
-                'idusuario' => $idusuario
-            ]); 
         }
         catch(Exception $e) {
             throw new Exception("Erro: " . $e->getMessage());
