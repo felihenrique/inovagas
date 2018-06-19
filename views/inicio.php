@@ -14,13 +14,13 @@
 			<li><a href="/vagas/listarVagas.php">Todas as vagas</a></li>
 			<li><a href="/vagas/listarVagas.php">Vagas canceladas</a></li>
 			<li><a href="/vagas/listarVagas.php">Vagas publicadas</a></li>
-			<li><a href="">Candidatos</a></li>
+			<li><a href="/vagas/listarcandidatos.php">Candidatos</a></li>
 		</ul>
 <?php } ?>
 
 <?php if ($perfil == "aluno") { ?>
 		<ul>
-			<li><a href="">Inscrições</a></li>
+			<li><a href="/vagas/candidatura.php">Inscrições</a></li>
 		</ul>
 <?php } ?>
 
