@@ -5,10 +5,10 @@
 - Login no sistema (Para todos). (PHILIPE) (CONCLUÍDO)
 - Listagem de empresas pré-cadastradas e aprovação (Para o administrador). (JESSIELY) (CONCLUÍDO)
 - Listagem de vagas que criou (Para a empresa). 
-	- Listagem das vagas que a empresa criou. (LARISSA) (CONCLUÍDO)
-	- Exclusão/Cancelamento de vagas (LARISSA) (CONCLUÍDO)
+	- Listagem das vagas que a empresa criou. (LARISSA/PHILIPE) (CONCLUÍDO)
+	- Exclusão/Cancelamento de vagas (LARISSA/PHILIPE) (CONCLUÍDO)
 	- Passagem da fase de recolhimento de currículos para a fase de seleção.
 	- Seleção dos alunos que participarão da seleção.
 	- Preenchimento do horário, local e data para a entrevista para cada aluno.
 	- Preenchimento em lote do horário, local e data.
-- Listagem de candidatos (Para a empresa). (JESSIELY)
+- Listagem de candidatos (Para a empresa). (JESSIELY/PHILIPE) (CONCLUIDO)

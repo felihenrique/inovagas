@@ -48,9 +48,17 @@ class VagaRepository extends Repository {
     }
 
     public function listar($idempresa){
-      //  var_dump($idempresa);
-      //  die();
-        $query = "SELECT vaga.*, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome, empresa.idusuario FROM vaga INNER JOIN vaga_historico ON(vaga.idvaga=vaga_historico.idvaga) INNER JOIN vaga_status ON(vaga_status.idstatus=vaga_historico.idstatus) INNER JOIN empresa ON (vaga.idempresa = empresa.idusuario) WHERE empresa.idusuario = '{$idempresa}' ORDER BY vaga.titulo";
+        $query = "SELECT *,
+        (SELECT vs.nome FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as status,
+        (SELECT vh.data FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as data
+        FROM vaga
+        WHERE vaga.idempresa=:idempresa
+        AND NOT EXISTS(SELECT idhistorico FROM vaga_historico vh WHERE vh.idstatus = 5 AND vh.idvaga = vaga.idvaga)
+        ORDER BY titulo";
          try {
             $result = $this->connection->execute($query, [
                 'idempresa' => $idempresa
@@ -63,9 +71,17 @@ class VagaRepository extends Repository {
     }
 
     public function listarCanceladas($idempresa){
-      //  var_dump($idempresa);
-      //  die();
-        $query = "SELECT vaga.*, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome, empresa.idusuario FROM vaga INNER JOIN vaga_historico ON(vaga.idvaga=vaga_historico.idvaga) INNER JOIN vaga_status ON(vaga_status.idstatus=vaga_historico.idstatus) INNER JOIN empresa ON (vaga.idempresa = empresa.idusuario) WHERE empresa.idusuario = '{$idempresa}' AND vaga_status.nome='Cancelada' ORDER BY vaga.titulo";
+        $query = "SELECT *,
+        (SELECT vs.nome FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as status,
+        (SELECT vh.data FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as data
+        FROM vaga
+        WHERE vaga.idempresa=:idempresa
+        AND EXISTS(SELECT idhistorico FROM vaga_historico vh WHERE vh.idstatus = 5 AND vh.idvaga = vaga.idvaga)
+        ORDER BY titulo";
          try {
             $result = $this->connection->execute($query, [
                 'idempresa' => $idempresa
@@ -78,10 +94,19 @@ class VagaRepository extends Repository {
     }
 
     public function listarPublicadas($idempresa){
-      //  var_dump($idempresa);
-      //  die();
-        $query = "SELECT vaga.*, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome, empresa.idusuario FROM vaga INNER JOIN vaga_historico ON(vaga.idvaga=vaga_historico.idvaga) INNER JOIN vaga_status ON(vaga_status.idstatus=vaga_historico.idstatus) INNER JOIN empresa ON (vaga.idempresa = empresa.idusuario) WHERE empresa.idusuario = '{$idempresa}' AND vaga_status.nome='Publicada' ORDER BY vaga.titulo";
-         try {
+        $query = "SELECT *,
+        (SELECT vs.nome FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus 
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as status,
+        (SELECT vh.data FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as data
+        FROM vaga
+        WHERE vaga.idempresa=:idempresa
+        AND EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idvaga = vaga.idvaga AND vh.idstatus = 2)
+        AND NOT EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idstatus = 5 AND vh.idvaga = vaga.idvaga)
+        ORDER BY titulo";
+        try {
             $result = $this->connection->execute($query, [
                 'idempresa' => $idempresa
             ]);
@@ -127,27 +152,24 @@ class VagaRepository extends Repository {
         return true;
     }
 
-    public function listarCandidatos() {
-        $query = "SELECT * FROM aluno, candidatura, vaga WHERE aluno.idusuario = candidatura.idaluno AND vaga.idvaga = candidatura.idvaga";
+    public function listarCandidatos($idvaga) {
+        $query = "SELECT C.idcandidatura, A.nome, A.semestre_inicio, A.ano_inicio, 
+        A.curso, A.data_nascimento 
+        FROM candidatura C 
+        INNER JOIN aluno A ON A.idusuario = C.idaluno
+        INNER JOIN vaga V ON V.idvaga = C.idvaga
+        WHERE V.idvaga = :idvaga
+        ";
          try {
-            $result = $this->connection->execute($query);
+            $result = $this->connection->execute($query, [
+                'idvaga' => $idvaga
+            ]);
             return $result;
         }
         catch(Exception $e) {
             throw new Exception("Erro: " . $e->getMessage());
         }
     }
-
-   /* public function vagasPublicadas() {
-        $query = "SELECT * FROM vaga INNER JOIN vaga_historico ON (vaga_historico.idvaga = vaga.idvaga) INNER JOIN vaga_status ON (vaga_historico.idstatus = vaga_status.idstatus) WHERE vaga_status.nome = 'Publicada'";
-         try {
-            $result = $this->connection->execute($query);
-            return $result;
-        }
-        catch(Exception $e) {
-            throw new Exception("Erro: " . $e->getMessage());
-        }
-    }*/
 
     public function candidatar($idvaga, $idusuario) {
         $query = "UPDATE candidatura SET idvaga = :idvaga WHERE idaluno = :idusuario"; 
@@ -163,33 +185,52 @@ class VagaRepository extends Repository {
         }
     }
 
+    public function listarEmSelecao($idempresa) {
+        $query = "SELECT *,
+        (SELECT vs.nome FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus 
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as status,
+        (SELECT vh.data FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus
+        WHERE vh.idvaga = vaga.idvaga
+        ORDER BY data DESC LIMIT 1) as data
+        FROM vaga
+        WHERE vaga.idempresa=:idempresa
+        AND EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idvaga = vaga.idvaga AND vh.idstatus = 3)
+        AND NOT EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idstatus = 5 AND vh.idvaga = vaga.idvaga)
+        ORDER BY titulo";
+        try {
+            $result = $this->connection->execute($query, [
+                'idempresa' => $idempresa
+            ]);
+            return $result;
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
+
+    public function avancarFaseDeSelecao($idvaga) {
+        $query = "INSERT INTO vaga_historico(idvaga, idstatus, data) VALUES (:idvaga, 3, NOW())";
+        try {
+            $result = $this->connection->execute($query, [
+                'idvaga' => $idvaga
+            ]); 
+            return $result;
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
+
     public function cancelar($idvaga) {
-         $this->connection->getPDO()->beginTransaction();
-         try {   
-            //STATUS
-            $query = "SELECT * FROM vaga_status WHERE nome='Cancelada'";
-            try {
-                $idstatus = $this->connection->execute($query);
-            }
-            catch(Exception $e) {
-                throw new Exception("Erro: " . $e->getMessage());
-            }
-            
             //CRIA NOVO HISTORICO
             $this->connection->execute("INSERT INTO vaga_historico(idvaga, idstatus, data) 
             VALUES (:idvaga, :idstatus, NOW())", 
             [
                 ':idvaga' => $idvaga,
-                ':idstatus' => $idstatus[0]["idstatus"],
+                ':idstatus' => 5,
             ]);
-            $this->connection->getPDO()->commit();
             return true;
-        }
-        catch(Exception $e) {
-            $this->connection->getPDO()->rollBack();
-            echo $e->getMessage();
-            return false;
-        }
     }
 
     public function publicar($idvaga) {

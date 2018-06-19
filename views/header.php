@@ -35,6 +35,9 @@
           <a class="dropdown-item" href="/vagas/listarVagasPublicadas.php">
           Listar publicadas
           </a>
+          <a class="dropdown-item" href="/vagas/listarVagasEmSelecao.php">
+          Listar em seleção
+          </a>
         </div>
       </li>
       <li class="nav-item dropdown">
