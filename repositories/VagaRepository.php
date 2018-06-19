@@ -50,7 +50,7 @@ class VagaRepository extends Repository {
     public function listar($idempresa){
       //  var_dump($idempresa);
       //  die();
-        $query = "SELECT vaga.*, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome, empresa.idusuario FROM vaga, vaga_historico, vaga_status, empresa WHERE vaga.idvaga=vaga_historico.idvaga AND vaga_status.idstatus=vaga_historico.idstatus AND vaga.idempresa= '{$idempresa}'";
+        $query = "SELECT vaga.*, vaga_historico.idstatus, vaga_historico.data, vaga_status.nome, empresa.idusuario FROM vaga INNER JOIN vaga_historico ON(vaga.idvaga=vaga_historico.idvaga) INNER JOIN vaga_status ON(vaga_status.idstatus=vaga_historico.idstatus) INNER JOIN empresa ON (vaga.idempresa = empresa.idusuario) WHERE empresa.idusuario = '{$idempresa}' ORDER BY vaga.titulo";
          try {
             $result = $this->connection->execute($query, [
                 'idempresa' => $idempresa
