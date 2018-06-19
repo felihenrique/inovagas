@@ -12,13 +12,13 @@
 		<ul>
 			<li><a href="/vagas/criarVaga.php">Criar vaga</a></li>
 			<li><a href="/vagas/listarVagas.php">Vagas criadas</a></li>
-			<li><a href="">Candidatos</a></li>
+			<li><a href="/vagas/listarcandidatos.php">Candidatos</a></li>
 		</ul>
 <?php } ?>
 
 <?php if ($perfil == "aluno") { ?>
 		<ul>
-			<li><a href="">Inscrições</a></li>
+			<li><a href="/vagas/candidatura.php">Inscrições</a></li>
 		</ul>
 <?php } ?>
 
