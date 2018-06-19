@@ -11,7 +11,9 @@
 <?php if ($perfil == "empresa") { ?>
 		<ul>
 			<li><a href="/vagas/criarVaga.php">Criar vaga</a></li>
-			<li><a href="/vagas/listarVagas.php">Vagas criadas</a></li>
+			<li><a href="/vagas/listarVagas.php">Todas as vagas</a></li>
+			<li><a href="/vagas/listarVagas.php">Vagas canceladas</a></li>
+			<li><a href="/vagas/listarVagas.php">Vagas publicadas</a></li>
 			<li><a href="/vagas/listarcandidatos.php">Candidatos</a></li>
 		</ul>
 <?php } ?>
