@@ -24,11 +24,22 @@
 			<td><?php echo $vaga['status'] ?></td>
 			<td><?php echo $vaga['data'] ?></td>
 			<td>
-				<a href="editarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Alterar</a>
-				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Deletar</a>
-				<a href="cancelarVaga.php?idvaga=<?php echo $vaga['idvaga'];?>">Cancelar</a>
-				<a href="listarcandidatos.php?idvaga=<?php echo $vaga['idvaga'];?>&selecao=1">Selecionar candidatos</a>
-				<a href="finalizarvaga.php?idvaga=<?php echo $vaga['idvaga'];?>">Finalizar vaga</a>
+				<a href="editarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>" title="Editar vaga">
+				<i class="fas fa-edit"></i>
+				</a>
+				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>" title="Deletar vaga">
+				<i class="fas fa-trash"></i>
+				</a>
+				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>" title="Cancelar">
+				<i class="fas fa-ban"></i>
+				</a>
+				<a href="listarcandidatos.php?idvaga=<?php echo $vaga['idvaga'];?>&selecao=1" 
+				title="Selecionar candidatos">
+				<i class="fas fa-list-ul"></i>
+				</a>
+				<a href="finalizarvaga.php?idvaga=<?php echo $vaga['idvaga'];?>" title="Finalizar vaga">
+				<i class="fas fa-check"></i>
+				</a>
 			</td>
 		</tr>
 	<?php } ?>

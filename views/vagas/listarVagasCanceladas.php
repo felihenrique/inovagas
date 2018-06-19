@@ -25,7 +25,9 @@
 			<td><?php echo $vaga['status'] ?></td>
 			<td><?php echo $vaga['data'] ?></td>
 			<td>
-				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Delete</a>
+				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>" title="Deletar vaga">
+				<i class="fas fa-trash"></i>
+				</a>
 			</td>
 		</tr>
 	<?php } ?>
