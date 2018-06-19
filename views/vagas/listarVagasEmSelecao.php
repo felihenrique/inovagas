@@ -1,5 +1,5 @@
 <table class="table table-striped">
-<h5 class="card-title">Vagas PUBLICADAS</h5>
+<h5 class="card-title">Vagas Em seleção</h5>
 <tr>
 	<th scope="col">Titulo</th>
 	<th scope="col">Descrição</th>
@@ -27,8 +27,8 @@
 				<a href="editarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Alterar</a>
 				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Deletar</a>
 				<a href="cancelarVaga.php?idvaga=<?php echo $vaga['idvaga'];?>">Cancelar</a>
-				<a href="listarcandidatos.php?idvaga=<?php echo $vaga['idvaga'];?>">Lista de candidatos</a>
-				<a href="fasedeselecao.php?idvaga=<?php echo $vaga['idvaga'];?>">Passar para fase de selecao</a>
+				<a href="listarcandidatos.php?idvaga=<?php echo $vaga['idvaga'];?>&selecao=1">Selecionar candidatos</a>
+                <a href="fasedeentrevista.php?idvaga=<?php echo $vaga['idvaga'];?>">Passar para a fase de entrevista</a>
 			</td>
 		</tr>
 	<?php } ?>

@@ -10,6 +10,7 @@
 	<th scope="col">Meses Duração</th>
 	<th scope="col">Status</th>
 	<th scope="col">Data de atualização</th>
+	<th scope="col">Opções</th>
 	
 </tr>
 	<?php foreach ($vagas as $vaga) { ?>
@@ -21,10 +22,10 @@
 			<td><?php echo $vaga['remuneracao'] ?></td>
 			<td><?php echo $vaga['carga_horaria'] ?></td>
 			<td><?php echo $vaga['meses_duracao'] ?></td>
-			<td><?php echo $vaga['nome'] ?></td>
+			<td><?php echo $vaga['status'] ?></td>
 			<td><?php echo $vaga['data'] ?></td>
 			<td>
-				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>" onClick="return confirm('Are you sure you want to delete?')\">Delete</a>
+				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Delete</a>
 			</td>
 		</tr>
 	<?php } ?>
