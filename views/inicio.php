@@ -24,5 +24,7 @@
 <?php if ($perfil == "aluno") { ?>
 		<ul>
 			<li><a href="/vagas/candidatura.php">Candidatar a vaga</a></li>
+			<li><a href="/usuario/listavagascandidatadas.php">Vagas em que se candidatou</a></li>
+			
 		</ul>
 <?php } ?>

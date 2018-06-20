@@ -60,4 +60,22 @@ class UsuarioRepository extends Repository {
             throw new Exception("Erro na execução: " . $e->getMessage());
         }
     }
+
+    public function listaVagasCandidatadas($idusuario)
+    {
+        $query = "SELECT V.*, E.nome_fantasia,
+        EXISTS(SELECT identrevista FROM entrevista E WHERE E.idcandidatura = C.idcandidatura) as selecionado
+        FROM candidatura C
+        INNER JOIN vaga V ON V.idvaga = C.idvaga
+        INNER JOIN empresa E ON E.idusuario = V.idempresa
+        WHERE C.idaluno = :idusuario";
+        try {
+            return $this->connection->execute($query, [
+                'idusuario' => $idusuario
+            ]);
+        }
+        catch(Exception $e) {
+            throw new Exception("Erro: " . $e->getMessage());
+        }
+    }
 }
