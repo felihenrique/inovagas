@@ -1,4 +1,3 @@
-<h1>INDEX</h1>
 <?php echo "Olá " . $usuario['login']; ?>
 
 <?php if ($perfil == "administrador") { ?>
@@ -8,20 +7,22 @@
 		</ul>
 <?php } ?>
 
-<?php if ($perfil == "empresa") { ?>
+<? if ($perfil == "empresa"): ?>
+		<? if (!$situacao_cadastro) : ?>
+			<div class="alert alert-danger">Seu cadastro ainda não foi aprovado</div>
+		<? endif; ?>
+		<? if($situacao_cadastro): ?>
 		<ul>
 			<li><a href="/vagas/criarVaga.php">Criar vaga</a></li>
 			<li><a href="/vagas/listarVagas.php">Todas as vagas</a></li>
-			<li><a href="/vagas/listarVagas.php">Vagas canceladas</a></li>
-			<li><a href="/vagas/listarVagas.php">Vagas publicadas</a></li>
-			<li><a href="/vagas/listarcandidatos.php">Candidatos</a></li>
+			<li><a href="/vagas/listarVagasCanceladas.php">Vagas canceladas</a></li>
+			<li><a href="/vagas/listarVagasPublicadas.php">Vagas publicadas</a></li>
 		</ul>
-<?php } ?>
+		<? endif; ?>
+<? endif; ?>
 
 <?php if ($perfil == "aluno") { ?>
 		<ul>
-			<li><a href="/vagas/candidatura.php">Inscrições</a></li>
+			<li><a href="/vagas/candidatura.php">Candidatar a vaga</a></li>
 		</ul>
 <?php } ?>
-
-<br><a href="/usuario/logout.php">Logout</a>

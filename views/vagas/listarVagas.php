@@ -27,7 +27,9 @@
 				<a href="editarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Alterar</a>
 				<a href="deletarVagas.php?idvaga=<?php echo $vaga['idvaga'];?>">Deletar</a>
 				<a href="cancelarVaga.php?idvaga=<?php echo $vaga['idvaga'];?>">Cancelar</a>
+				<?php if($vaga['status'] == "Criada") : ?>
 				<a href="publicarVaga.php?idvaga=<?php echo $vaga['idvaga'];?>">Publicar</a>
+				<? endif; ?>
 			</td>
 		</tr>
 	<?php } ?>

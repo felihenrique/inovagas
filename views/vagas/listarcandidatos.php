@@ -16,8 +16,8 @@
   <tbody>
     <?php foreach ($candidatos as $candidato) { ?>
 		<tr>
-      <td><?php if($selecao) { ?> <input type="checkbox" name="listaalunos[]" 
-      value="<?php echo $candidato['idcandidatura'] ?>"> <?php } ?></td>
+    <?php if($selecao) { ?><td><input type="checkbox" name="listaalunos[]" 
+      value="<?php echo $candidato['idcandidatura'] ?>"> </td><?php } ?>
 			<td><?php echo $candidato['nome'] ?></td>
 			<td><?php echo $candidato['semestre_inicio'] ?></td>
       <td><?php echo $candidato['ano_inicio'] ?></td>

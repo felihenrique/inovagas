@@ -9,10 +9,6 @@ if(!file_exists('controllers/' . $arquivo_req)) {
     echo "Not found";
     die();
 }
-session_start();
-if(!isset($_SESSION['logged'])) {
-    $_SESSION['logged'] = false;
-}
 $conf = parse_ini_file('CONFIGURACOES.ini');
 
 $views = PATH_SEPARATOR . './views';
@@ -20,6 +16,18 @@ $controllers = PATH_SEPARATOR . './controllers';
 $repositories = PATH_SEPARATOR . './repositories';
 $atual = get_include_path() . PATH_SEPARATOR;
 set_include_path($atual . $views . $controllers . $repositories);
-require_once("utilidades.php");
 
+session_start();
+if(!isset($_SESSION['logged'])) {
+    $_SESSION['logged'] = false;
+} 
+
+if($_SESSION['logged'] && empty($_SESSION['perfil'])) {
+    require_once('UsuarioRepository.php');
+    
+    $usuarioRepo = new UsuarioRepository();
+    $_SESSION['perfil'] = $usuarioRepo->getPerfil($_SESSION['idusuario']);
+}
+
+require_once("utilidades.php");
 require_once('controllers/' . $arquivo_req);

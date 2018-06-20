@@ -37,6 +37,14 @@ class EmpresaRepository extends Repository {
         }
     }
 
+    public function verificarSituacaoCadastro($idusuario) {
+        $query = "SELECT status_aprovacao FROM empresa WHERE idusuario = :idusuario";
+        $result = $this->connection->execute($query, [
+            'idusuario' => $idusuario
+        ]);
+        return $result[0]['status_aprovacao'] == 1;
+    }
+
     public function listarPreCadastradas() {
         $query = "SELECT * FROM usuario U INNER JOIN empresa E ON U.idusuario = E.idusuario WHERE status_aprovacao IS NULL";
         try {

@@ -104,7 +104,7 @@ class VagaRepository extends Repository {
         FROM vaga
         WHERE vaga.idempresa=:idempresa
         AND EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idvaga = vaga.idvaga AND vh.idstatus = 2)
-        AND NOT EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idstatus = 5 AND vh.idvaga = vaga.idvaga)
+        AND NOT EXISTS(SELECT * FROM vaga_historico vh WHERE vh.idstatus IN (3, 4, 5) AND vh.idvaga = vaga.idvaga)
         ORDER BY titulo";
         try {
             $result = $this->connection->execute($query, [
@@ -189,9 +189,19 @@ class VagaRepository extends Repository {
     }
 
     public function vagasPublicadas(){
-        $query = "SELECT * FROM vaga INNER JOIN vaga_historico ON (vaga_historico.idvaga = vaga.idvaga) INNER JOIN vaga_status ON (vaga_historico.idstatus = vaga_status.idstatus) WHERE vaga_status.nome = 'Publicada'";
+        $query = "SELECT V.*, E.nome_fantasia,
+        (SELECT vs.nome FROM vaga_historico vh INNER JOIN vaga_status vs ON vh.idstatus = vs.idstatus
+        WHERE vh.idvaga = V.idvaga
+        ORDER BY data DESC LIMIT 1) as status
+        FROM vaga V
+        INNER JOIN empresa E ON E.idusuario = V.idempresa
+        WHERE NOT EXISTS(SELECT idcandidatura FROM candidatura WHERE idaluno=:idaluno AND idvaga=V.idvaga)
+        HAVING status = 'Publicada'
+        ORDER BY titulo";
         try {
-            $result = $this->connection->execute($query);
+            $result = $this->connection->execute($query, [
+                'idaluno' => $_SESSION['idusuario']
+            ]);
             return $result;
         }
         catch(Exception $e) {

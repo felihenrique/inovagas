@@ -17,6 +17,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+    <?php if (!empty($_SESSION['perfil']) && $_SESSION['perfil'] === "empresa"): ?>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-pencil-alt"></i>
@@ -34,8 +35,13 @@
           <a class="dropdown-item" href="/vagas/listarVagasEmSelecao.php">
           Listar em seleção
           </a>
+          <a class="dropdown-item" href="/vagas/listarVagasPublicadas.php">
+          Listar publicadas
+          </a>
         </div>
       </li>
+    <?php endif; ?>
+    <?php if(!$_SESSION['logged']): ?>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-pencil-alt"></i>
@@ -53,8 +59,9 @@
           </a>
         </div>
       </li>
+    <?php endif; ?>
     </ul>
-    <?php if(isset($_SESSION['logged']) && $_SESSION['logged']) { ?> 
+    <?php if($_SESSION['logged']) { ?> 
       <a class="nav-item" href="/usuario/editarperfil.php" style="margin-right: 10px">
           <i class="fas fa-user-alt"></i>
             Editar perfil
